@@ -1,0 +1,54 @@
+name: Start Markdown Skills Quiz
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create quiz instructions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const marker = '<!-- klis-markdown-quiz-instructions -->';
+            const body = `${marker}
+            # Skills Quiz 0 — Markdown Foundations
+
+            **Suggested time: 15 minutes**
+
+            Complete all ten tasks in \`markdown-quiz.md\` between the \`QUIZ-START\` and \`QUIZ-END\` markers.
+
+            ## Rules
+
+            - Do not delete or rename the quiz markers.
+            - Do not change the grader or workflow files.
+            - Complete the Markdown yourself according to your teacher's quiz rules.
+            - Commit your completed \`markdown-quiz.md\` to \`main\`.
+            - After the commit, the automatic grader will post a score out of 100.
+
+            ## Skills being checked
+
+            Heading · emphasis · lists · link · inline code · fenced code · task list · blockquote · table
+
+            When finished, check the **Markdown Skills Quiz — Progress** Issue or the latest Actions run for feedback.`;
+
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, state: 'all', per_page: 100
+            });
+            const existing = issues.find(i => !i.pull_request && i.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner, repo, issue_number: existing.number, state: 'open', body
+              });
+            } else {
+              await github.rest.issues.create({
+                owner, repo, title: 'Skills Quiz 0 — Markdown Instructions', body
+              });
+            }
