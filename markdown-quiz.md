@@ -45,10 +45,9 @@ I am **smart**, but *lazy*.
 
 > This is a quote, very good quote.
 
-| First Header  |
-| ------------- |
-| Content Cell |
-| Content Cell |
-
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
 <!-- QUIZ-END -->
