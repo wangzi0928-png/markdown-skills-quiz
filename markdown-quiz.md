@@ -18,7 +18,30 @@ Complete every task in the answer area below. Do not delete the `QUIZ-START` or 
 ---
 
 <!-- QUIZ-START -->
+# My Markdown Skills
+I am **smart**, but *lazy*.   
+- 1
+- 2
+- 3
+1. item 1
+2. item 2
+3. item 3      
+(https://github.com/KLIS-CS/GitHub-Markdown-Skills-Quiz)     
+`git status`
+```
+{
+  git add .
+  git commit -m "markdown quiz
+}
+```    
+- [x] Homework
+- [ ] read one page
+> This is a quote, very good quote.
 
-Replace this line with your Markdown answers.
+| First Header  |
+| ------------- |
+| Content Cell |
+| Content Cell |
+
 
 <!-- QUIZ-END -->
